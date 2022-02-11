@@ -1,0 +1,82 @@
+/*
+The default box model handles paddings a bit awkawrdly, so we use an more
+'natural' layout model.
+See https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+*/
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+We use a bit of flex magic to get a responsive two-column layout that folds
+into one column below a certain viewport width.
+ */
+.content-wrapper {
+  display:  flex;
+}
+
+.column {
+  padding: 2vh 3vw;
+}
+
+.column:first-child {
+  flex: 0 0 30vw;
+  width: 300vw;
+}
+
+.column:last-child {
+  flex: 1 1;
+}
+
+@media (max-width: 768px) {
+
+  .column:first-child,
+  .column:last-child {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .column::first-of-type {
+    margin-bottom: 2em;
+  }
+}
+
+/*
+The padding percentage use allows us to get a box that always keeps its aspect
+ratio when resizing.
+ */
+.model-display-wrapper {
+  border: 1px dotted #000;
+  background-color: #EEE;
+  height: 0;
+  padding-top: 50%;
+  width:  100%;
+}
+
+/*
+The canvas where the 3D rendering happens always completely fills the wrapper.
+Because the wrapper will always keep the same aspect ratio, we won't have to
+worry about recalculating it for the camera in JavaScript.
+ */
+#model-display {
+  display:  block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
