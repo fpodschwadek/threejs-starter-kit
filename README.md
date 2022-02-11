@@ -10,6 +10,8 @@ In order to start up the kit, you need to have Docker locally installed and runn
 docker run -dit --name threejs_starter_kit -p 80:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4-alpine
 ```
 
-When executing the command for the first time, it might take little longer because the Docker image for the server installation needs to be downloaded first.
+When executing the command for the first time, it might take little longer because the Docker image for the server installation needs to be downloaded first. Once the Docker container is running, open `localhost` in your browser to see the HTML output.
+
+You can edit the content in the `htdocs` folder to experiment with three.js or build your own project based on the slim foundations of the starter kit.
 
 Have fun!
